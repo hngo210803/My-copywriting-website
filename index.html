@@ -1,0 +1,962 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Henry — Copywriter Agencies Trust To Get Sh*t Done</title>
+  <meta name="description" content="Sharp, on-brand copy delivered on time. Start with a free trial project — no contracts, no risk." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,700;0,900;1,700;1,900&display=swap" rel="stylesheet" />
+  <style>
+    /* ─── RESET ─────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; font-size: 16px; }
+
+    /* ─── TOKENS ─────────────────────────────── */
+    :root {
+      --bg:        #080808;
+      --bg2:       #111111;
+      --bg3:       #191919;
+      --bg4:       #222222;
+      --text:      #F0EBE1;
+      --muted:     #6B6B6B;
+      --muted2:    #999;
+      --gold:      #C9A84C;
+      --gold-lt:   #E8C97A;
+      --gold-bg:   rgba(201,168,76,.10);
+      --red:       #FF4D2E;
+      --border:    rgba(255,255,255,.07);
+      --border2:   rgba(255,255,255,.12);
+      --radius:    14px;
+    }
+
+    /* ─── BASE ───────────────────────────────── */
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { text-decoration: none; color: inherit; }
+
+    /* ─── NOISE OVERLAY ──────────────────────── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
+      opacity: 0.025;
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    /* ─── NAV ────────────────────────────────── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 48px;
+      height: 68px;
+      background: rgba(8,8,8,.82);
+      backdrop-filter: blur(24px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      font-size: 20px; font-weight: 900;
+      letter-spacing: -0.5px;
+    }
+    .nav-logo span { color: var(--gold); }
+
+    .nav-links {
+      display: flex; gap: 36px; list-style: none;
+    }
+    .nav-links a {
+      font-size: 13px; font-weight: 500;
+      color: var(--muted2);
+      transition: color .2s;
+    }
+    .nav-links a:hover { color: var(--text); }
+
+    /* ─── BUTTONS ────────────────────────────── */
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 13px 28px;
+      font-family: 'Inter', sans-serif;
+      font-size: 14px; font-weight: 700;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all .22s cubic-bezier(.4,0,.2,1);
+      border: none;
+    }
+    .btn-gold {
+      background: var(--gold);
+      color: #000;
+    }
+    .btn-gold:hover {
+      background: var(--gold-lt);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(201,168,76,.3);
+    }
+    .btn-ghost {
+      background: transparent;
+      color: var(--text);
+      border: 1.5px solid var(--border2);
+    }
+    .btn-ghost:hover {
+      border-color: var(--gold);
+      color: var(--gold);
+    }
+    .btn-lg { padding: 17px 38px; font-size: 16px; }
+
+    /* ─── SECTION SHELL ──────────────────────── */
+    .section { padding: 110px 48px; }
+    .container { max-width: 1160px; margin: 0 auto; }
+
+    .label {
+      display: inline-flex; align-items: center; gap: 10px;
+      font-size: 11px; font-weight: 700;
+      letter-spacing: 2.5px; text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 20px;
+    }
+    .label::before {
+      content: '';
+      width: 20px; height: 2px;
+      background: var(--gold);
+      border-radius: 2px;
+    }
+
+    .section-title {
+      font-size: clamp(36px, 5vw, 58px);
+      font-weight: 900;
+      letter-spacing: -2.5px;
+      line-height: 1.05;
+    }
+
+    .gold { color: var(--gold); }
+    .italic { font-style: italic; font-family: 'Playfair Display', serif; }
+
+    hr.accent {
+      border: none;
+      width: 56px; height: 3px;
+      background: var(--gold);
+      border-radius: 3px;
+      margin: 28px 0;
+    }
+
+    /* ─── HERO ───────────────────────────────── */
+    .hero {
+      min-height: 100svh;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      grid-template-rows: 1fr auto;
+      align-items: center;
+      gap: 0 64px;
+      padding: 140px 48px 80px;
+      max-width: 1160px; margin: 0 auto;
+      position: relative;
+    }
+
+    .hero-left {
+      grid-column: 1;
+      grid-row: 1;
+      display: flex; flex-direction: column; justify-content: center;
+    }
+
+    .hero-photo-wrap {
+      grid-column: 2;
+      grid-row: 1;
+      display: flex; align-items: center; justify-content: center;
+    }
+
+    .hero-photo {
+      width: 340px;
+      height: 420px;
+      object-fit: contain;
+      object-position: center;
+      background: #111;
+      border-radius: 20px;
+      border: 2px solid rgba(201,168,76,.25);
+      display: block;
+    }
+
+    .hero-photo-placeholder {
+      width: 340px;
+      height: 420px;
+      border-radius: 20px;
+      border: 2px dashed rgba(201,168,76,.3);
+      background: var(--bg2);
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      gap: 12px;
+      color: var(--muted);
+      font-size: 14px; text-align: center;
+      padding: 24px;
+    }
+    .hero-photo-placeholder span { font-size: 40px; }
+
+    .hero-stats {
+      grid-column: 1 / -1;
+      grid-row: 2;
+    }
+
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--gold-bg);
+      border: 1px solid rgba(201,168,76,.25);
+      color: var(--gold);
+      padding: 8px 18px;
+      border-radius: 100px;
+      font-size: 12px; font-weight: 600;
+      letter-spacing: .5px;
+      margin-bottom: 40px;
+      width: fit-content;
+    }
+    .hero-badge .dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--gold);
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0%,100% { opacity: 1; transform: scale(1); }
+      50% { opacity: .5; transform: scale(.7); }
+    }
+
+    .hero-h1 {
+      font-size: clamp(52px, 9vw, 108px);
+      font-weight: 900;
+      letter-spacing: -5px;
+      line-height: .96;
+      margin-bottom: 36px;
+    }
+
+    .hero-sub {
+      font-size: 19px;
+      color: var(--muted2);
+      max-width: 480px;
+      line-height: 1.75;
+      margin-bottom: 52px;
+    }
+
+    .hero-cta { display: flex; gap: 16px; flex-wrap: wrap; align-items: center; }
+
+    .hero-stats {
+      display: flex; gap: 56px; flex-wrap: wrap;
+      margin-top: 80px;
+      padding-top: 48px;
+      border-top: 1px solid var(--border);
+    }
+    .stat-num {
+      font-size: 36px; font-weight: 900;
+      letter-spacing: -1.5px;
+      color: var(--gold);
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+    .stat-label { font-size: 12px; color: var(--muted); font-weight: 500; }
+
+    /* hero deco */
+    .hero-deco {
+      position: absolute;
+      top: 15%; right: -100px;
+      width: 600px; height: 600px;
+      background: radial-gradient(ellipse at center, rgba(201,168,76,.07) 0%, transparent 65%);
+      pointer-events: none;
+    }
+
+    /* ─── PAIN SECTION ───────────────────────── */
+    .pain { background: var(--bg2); }
+
+    .pain-head {
+      max-width: 640px;
+      margin-bottom: 64px;
+    }
+    .pain-head p {
+      font-size: 18px;
+      color: var(--muted2);
+      line-height: 1.75;
+      margin-top: 16px;
+    }
+
+    .pain-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+
+    .pain-card {
+      background: var(--bg2);
+      padding: 44px 36px;
+      transition: background .2s;
+    }
+    .pain-card:hover { background: var(--bg3); }
+
+    .pain-icon {
+      width: 48px; height: 48px;
+      border-radius: 12px;
+      background: rgba(255,77,46,.1);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 22px;
+      margin-bottom: 24px;
+    }
+    .pain-card h3 {
+      font-size: 17px; font-weight: 700;
+      color: var(--red);
+      margin-bottom: 12px;
+      line-height: 1.3;
+    }
+    .pain-card p { font-size: 14px; color: var(--muted); line-height: 1.8; }
+
+    /* skip arrow */
+    .skip-wrap {
+      text-align: center;
+      padding: 48px 0 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+    .skip-wrap a { color: var(--gold); font-weight: 600; }
+
+    /* ─── ABOUT ──────────────────────────────── */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 1fr;
+      gap: 80px;
+      align-items: start;
+    }
+
+    .about-body p {
+      font-size: 16px; color: var(--muted2);
+      line-height: 1.85;
+      margin-bottom: 18px;
+    }
+
+    .process {
+      margin-top: 48px;
+      display: flex; flex-direction: column; gap: 20px;
+    }
+    .process-step {
+      display: flex; gap: 20px; align-items: flex-start;
+    }
+    .step-num {
+      width: 40px; height: 40px;
+      border-radius: 50%;
+      background: var(--gold);
+      color: #000;
+      font-weight: 900; font-size: 15px;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .step-info h4 { font-size: 15px; font-weight: 700; margin-bottom: 3px; }
+    .step-info p  { font-size: 13px; color: var(--muted); margin: 0; }
+
+    /* guarantee card */
+    .guarantee-card {
+      background: var(--bg3);
+      border: 1px solid var(--border2);
+      border-radius: 20px;
+      padding: 44px 40px;
+      position: sticky; top: 100px;
+    }
+    .guarantee-tag {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: var(--gold-bg);
+      border: 1px solid rgba(201,168,76,.25);
+      color: var(--gold);
+      padding: 6px 14px;
+      border-radius: 100px;
+      font-size: 12px; font-weight: 700;
+      margin-bottom: 28px;
+    }
+    .guarantee-card h3 {
+      font-size: 24px; font-weight: 900;
+      letter-spacing: -1px; line-height: 1.2;
+      margin-bottom: 20px;
+    }
+    .guarantee-card p {
+      font-size: 14px; color: var(--muted2);
+      line-height: 1.8; margin-bottom: 16px;
+    }
+    .guarantee-list {
+      list-style: none;
+      display: flex; flex-direction: column; gap: 12px;
+      margin: 28px 0;
+    }
+    .guarantee-list li {
+      display: flex; align-items: center; gap: 10px;
+      font-size: 14px; color: var(--text);
+    }
+    .guarantee-list li::before {
+      content: '✓';
+      width: 22px; height: 22px;
+      border-radius: 50%;
+      background: rgba(201,168,76,.15);
+      color: var(--gold);
+      font-size: 11px; font-weight: 900;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+
+    /* ─── PORTFOLIO ──────────────────────────── */
+    .portfolio { background: var(--bg2); }
+
+    .portfolio-head {
+      display: flex; justify-content: space-between; align-items: flex-end;
+      margin-bottom: 52px; flex-wrap: wrap; gap: 24px;
+    }
+
+    .work-category {
+      margin-bottom: 56px;
+    }
+    .work-category:last-child { margin-bottom: 0; }
+
+    .work-category-label {
+      display: flex; align-items: center; gap: 16px;
+      margin-bottom: 24px;
+    }
+    .work-category-label h3 {
+      font-size: 13px; font-weight: 700;
+      letter-spacing: 2.5px; text-transform: uppercase;
+      color: var(--muted2);
+    }
+    .work-category-label::after {
+      content: '';
+      flex: 1; height: 1px;
+      background: var(--border);
+    }
+
+    .work-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .work-item {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 32px 28px;
+      transition: all .25s cubic-bezier(.4,0,.2,1);
+      display: flex; flex-direction: column;
+      cursor: pointer;
+    }
+    .work-item:hover {
+      border-color: rgba(201,168,76,.4);
+      transform: translateY(-5px);
+      box-shadow: 0 20px 60px rgba(0,0,0,.5);
+      background: #1e1e1e;
+    }
+
+    .work-tag {
+      font-size: 10px; font-weight: 700;
+      letter-spacing: 2px; text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 16px;
+    }
+    .work-item h3 {
+      font-size: 17px; font-weight: 800;
+      letter-spacing: -.3px;
+      margin-bottom: 10px;
+      line-height: 1.3;
+    }
+    .work-item p {
+      font-size: 13px; color: var(--muted);
+      line-height: 1.7; flex: 1;
+    }
+    .work-niche {
+      font-size: 12px;
+      color: var(--muted);
+      font-weight: 500;
+      margin-bottom: 10px;
+    }
+
+    .work-arrow {
+      margin-top: 24px;
+      display: flex; justify-content: flex-end;
+      color: var(--gold);
+      font-size: 18px;
+      opacity: 0;
+      transition: opacity .2s, transform .2s;
+    }
+    .work-item:hover .work-arrow {
+      opacity: 1;
+      transform: translateX(4px);
+    }
+
+    /* ─── TESTIMONIALS ───────────────────────── */
+    .testi-head { margin-bottom: 52px; }
+
+    .testi-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+
+    .testi-card {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 36px 32px;
+      transition: border-color .25s;
+    }
+    .testi-card:hover { border-color: rgba(201,168,76,.3); }
+
+    .stars { color: var(--gold); font-size: 13px; letter-spacing: 3px; margin-bottom: 20px; }
+
+    .testi-quote {
+      font-size: 16px; line-height: 1.75;
+      color: var(--text);
+      font-style: italic;
+      font-family: 'Playfair Display', serif;
+      margin-bottom: 28px;
+    }
+
+    .testi-author {
+      display: flex; align-items: center; gap: 12px;
+    }
+    .author-avatar {
+      width: 38px; height: 38px;
+      border-radius: 50%;
+      background: var(--gold-bg);
+      border: 1.5px solid rgba(201,168,76,.3);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 15px; font-weight: 900;
+      color: var(--gold);
+    }
+    .author-name {
+      font-size: 14px; font-weight: 700;
+      color: var(--text);
+    }
+    .author-role { font-size: 12px; color: var(--muted); }
+
+    /* ─── FINAL CTA ──────────────────────────── */
+    .final {
+      background: var(--bg2);
+      text-align: center;
+    }
+    .final-inner {
+      max-width: 720px; margin: 0 auto;
+    }
+    .final h2 {
+      font-size: clamp(40px, 6vw, 72px);
+      font-weight: 900;
+      letter-spacing: -3px;
+      line-height: 1.0;
+      margin-bottom: 28px;
+    }
+    .final p {
+      font-size: 18px; color: var(--muted2);
+      line-height: 1.75;
+      margin-bottom: 44px;
+    }
+    .final-note {
+      margin-top: 24px;
+      font-size: 13px; color: var(--muted);
+    }
+    .final-note span { color: var(--gold); }
+
+    /* ─── FOOTER ─────────────────────────────── */
+    footer {
+      padding: 36px 48px;
+      border-top: 1px solid var(--border);
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 12px;
+    }
+    footer p { font-size: 13px; color: var(--muted); }
+    footer a { color: var(--gold); }
+
+    /* ─── ANIMATIONS ─────────────────────────── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(36px);
+      transition: opacity .65s ease, transform .65s ease;
+    }
+    .reveal.in { opacity: 1; transform: translateY(0); }
+    .reveal-delay-1 { transition-delay: .1s; }
+    .reveal-delay-2 { transition-delay: .2s; }
+    .reveal-delay-3 { transition-delay: .3s; }
+    .reveal-delay-4 { transition-delay: .4s; }
+
+    /* ─── RESPONSIVE ─────────────────────────── */
+    @media (max-width: 900px) {
+      nav { padding: 0 24px; }
+      .nav-links { display: none; }
+      .hero {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto auto auto;
+        padding: 120px 24px 80px;
+        gap: 48px 0;
+      }
+      .hero-left { grid-column: 1; grid-row: 2; }
+      .hero-photo-wrap { grid-column: 1; grid-row: 1; }
+      .hero-photo, .hero-photo-placeholder {
+        width: 100%; height: 280px;
+      }
+      .hero-stats { grid-column: 1; grid-row: 3; }
+      .section { padding: 80px 24px; }
+      .pain-grid { grid-template-columns: 1fr; }
+      .about-grid { grid-template-columns: 1fr; gap: 48px; }
+      .guarantee-card { position: static; }
+      .work-grid { grid-template-columns: 1fr; }
+      .testi-grid { grid-template-columns: 1fr; }
+      footer { flex-direction: column; text-align: center; }
+    }
+    @media (max-width: 600px) {
+      .hero-h1 { letter-spacing: -3px; }
+      .hero-stats { gap: 32px; }
+      .pain-grid { gap: 0; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══════════ NAV ══════════ -->
+<nav>
+  <a href="#" class="nav-logo">Henry<span>.</span></a>
+  <ul class="nav-links">
+    <li><a href="#pain">The Problem</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#work">Work</a></li>
+    <li><a href="#testimonials">Reviews</a></li>
+  </ul>
+  <a href="https://calendly.com/henrycopybiz/30min" class="btn btn-gold" target="_blank">Book a Free Chat →</a>
+</nav>
+
+<!-- ══════════ HERO ══════════ -->
+<div style="max-width:1160px; margin:0 auto; position:relative;">
+  <div class="hero-deco"></div>
+</div>
+<div style="max-width:1160px; margin:0 auto;">
+  <div class="hero">
+
+    <!-- LEFT: text -->
+    <div class="hero-left">
+      <h1 class="hero-h1">
+        The Copy&shy;writer<br>
+        Agencies <em class="italic gold">Trust</em><br>
+        To Get Sh*t Done.
+      </h1>
+
+      <p class="hero-sub">
+        Start with a small project. If you don't like it, you don't pay.
+        No contracts. No retainers. No drama.
+      </p>
+
+      <div class="hero-cta">
+        <a href="https://calendly.com/henrycopybiz/30min" class="btn btn-gold btn-lg" target="_blank">
+          Book a 15-Min Chat →
+        </a>
+        <a href="#work" class="btn btn-ghost btn-lg">See My Work</a>
+      </div>
+    </div>
+
+    <!-- RIGHT: photo -->
+   <div class="hero-photo-wrap">
+  <img src="./henry.jpg" alt="Henry" class="hero-photo">
+</div>
+   
+
+    <!-- STATS: full width -->
+    <div class="hero-stats">
+      <div>
+        <div class="stat-num">3</div>
+        <div class="stat-label">Max revision rounds</div>
+      </div>
+      <div>
+        <div class="stat-num">$0</div>
+        <div class="stat-label">Risk on first project</div>
+      </div>
+      <div>
+        <div class="stat-num">100%</div>
+        <div class="stat-label">On-brand. On-time.</div>
+      </div>
+      <div>
+        <div class="stat-num">5★</div>
+        <div class="stat-label">Client reviews</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ PAIN ══════════ -->
+<section class="section pain" id="pain">
+  <div class="container">
+    <div class="pain-head reveal">
+      <div class="label">Sound Familiar?</div>
+      <h2 class="section-title">Hiring a Copywriter Shouldn't Be a&nbsp;<em class="italic">Roll&nbsp;of&nbsp;the&nbsp;Dice.</em></h2>
+      <hr class="accent" />
+      <p>You bring someone on. They promise sky-high ROI and guaranteed conversions. Sounds good on paper — until…</p>
+    </div>
+
+    <div class="pain-grid reveal">
+      <div class="pain-card">
+        <div class="pain-icon">⏳</div>
+        <h3>Takes forever to get a first draft</h3>
+        <p>You hire someone, get excited — then radio silence. Your deadline blows by and you're still waiting. Every. Single. Time.</p>
+      </div>
+      <div class="pain-card">
+        <div class="pain-icon">🤖</div>
+        <h3>The copy sounds like AI edited AI</h3>
+        <p>It lands in your inbox and reads like ChatGPT had a bad day. Generic. Lifeless. Nothing that sounds remotely like your brand.</p>
+      </div>
+      <div class="pain-card">
+        <div class="pain-icon">😩</div>
+        <h3>You're rewriting it at midnight</h3>
+        <p>You end up doing the work you paid someone else to do. At 11 pm. Thinking "I should've just done this myself."</p>
+      </div>
+    </div>
+
+    <div class="skip-wrap reveal">
+      Let's skip all that, yeah? → <a href="https://calendly.com/henrycopybiz/30min" target="_blank">Book a free 15-min chat</a>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ ABOUT ══════════ -->
+<section class="section" id="about">
+  <div class="container">
+    <div class="about-grid">
+      <!-- LEFT -->
+      <div class="about-body">
+        <div class="label reveal">About Me</div>
+        <h2 class="section-title reveal">Hey, I'm Henry.</h2>
+        <hr class="accent reveal" />
+
+        <div class="reveal">
+          <p>I'm not out here claiming to be a "top 1% copywriter". I just write sharp, on-brand copy — and I get it done on time.</p>
+          <p>Here's what actually matters: you hand me a brief, I turn it into copy that sounds like your brand, not like a robot trying to pass a marketing exam. You get it back fast, and if it doesn't land — you don't pay. Simple.</p>
+          <p style="font-weight:600; color: var(--text);">Yeah, I know I'm easy on the eyes. Thank you.</p>
+        </div>
+
+        <div class="process reveal">
+          <div class="process-step">
+            <div class="step-num">1</div>
+            <div class="step-info">
+              <h4>You send the brief</h4>
+              <p>Tell me what you need. I ask the right questions, not twenty annoying ones.</p>
+            </div>
+          </div>
+          <div class="process-step">
+            <div class="step-num">2</div>
+            <div class="step-info">
+              <h4>I write — you review</h4>
+              <p>Sharp, on-brand copy. Wrapped up in 3 rounds max. No endless revision loops.</p>
+            </div>
+          </div>
+          <div class="process-step">
+            <div class="step-num">3</div>
+            <div class="step-info">
+              <h4>We keep going (or we don't)</h4>
+              <p>If it works — great. We keep going. If not, no hard feelings. You owe me nothing.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT -->
+      <div class="reveal reveal-delay-2">
+        <div class="guarantee-card">
+          <div class="guarantee-tag">✦ Zero Risk Guarantee</div>
+          <h3>Start with a free trial project. You literally can't lose.</h3>
+          <p>You could keep scrolling through 30 more portfolios — or we could run a small, no-risk test and see if we click.</p>
+          <ul class="guarantee-list">
+            <li>Test project, no upfront commitment</li>
+            <li>Don't like it? Don't pay. Ever.</li>
+            <li>3 revision rounds max — no scope creep</li>
+            <li>On-brand copy, delivered on time</li>
+            <li>No retainers, no long-term lock-in</li>
+          </ul>
+          <a href="https://calendly.com/henrycopybiz/30min" class="btn btn-gold" style="width:100%; justify-content:center; margin-top:8px;" target="_blank">
+            Book a 15-Min Chat →
+          </a>
+          <p style="text-align:center; font-size:12px; color:var(--muted); margin-top:14px;">Free. No strings. Just a conversation.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ PORTFOLIO ══════════ -->
+<section class="section portfolio" id="work">
+  <div class="container">
+    <div class="portfolio-head reveal">
+      <div>
+        <div class="label">Past Work</div>
+        <h2 class="section-title">Check Out What<br>I've Written.</h2>
+      </div>
+      <a href="https://calendly.com/henrycopybiz/30min" class="btn btn-gold" target="_blank">Work With Me →</a>
+    </div>
+
+    <!-- COACHING -->
+    <div class="work-category reveal">
+      <div class="work-category-label">
+        <h3>Coaching</h3>
+      </div>
+      <div class="work-grid">
+        <a href="https://drive.google.com/file/d/1njyzxJWaL_gX9pBwJWZ7yNroR_9BYInz/view?usp=drive_link" class="work-item" target="_blank">
+          <div class="work-tag">Nurture Email</div>
+          <h3>NURSEPRENEURS</h3>
+          <div class="work-niche">Health Coach</div>
+          <div class="work-arrow">→</div>
+        </a>
+        <a href="https://drive.google.com/file/d/1T4ih93mlAn0hRlJivFBrpvfpsSxu40BP/view?usp=sharing" class="work-item" target="_blank">
+          <div class="work-tag">Welcome Sequence</div>
+          <h3>The Sales Training Academy</h3>
+          <div class="work-niche">Sales Coach</div>
+          <div class="work-arrow">→</div>
+        </a>
+        <a href="https://drive.google.com/file/d/1i57HxzuyuQojPhJzZm9wvQ4qXJDoz0BR/view?usp=drive_link" class="work-item" target="_blank">
+          <div class="work-tag">Meta Ads</div>
+          <h3>Chelsea Haines</h3>
+          <div class="work-niche">Life Coach</div>
+          <div class="work-arrow">→</div>
+        </a>
+      </div>
+    </div>
+
+    <!-- ECOM -->
+    <div class="work-category reveal">
+      <div class="work-category-label">
+        <h3>Ecom</h3>
+      </div>
+      <div class="work-grid">
+        <a href="https://drive.google.com/file/d/1X5VhHmkPgfQgCq6eOHV3YacwGzN9uGyu/view?usp=drive_link" class="work-item" target="_blank">
+          <div class="work-tag">E-commerce Emails</div>
+          <h3>Walker Family Goods</h3>
+          <div class="work-niche">Home & Lifestyle</div>
+          <div class="work-arrow">→</div>
+        </a>
+        <a href="https://drive.google.com/file/d/1VwJ0dt_pQrTORfS1cngxwZjt35Vv7nRW/view?usp=drive_link" class="work-item" target="_blank">
+          <div class="work-tag">E-commerce Emails</div>
+          <h3>Lelive</h3>
+          <div class="work-niche">Beauty & Skincare</div>
+          <div class="work-arrow">→</div>
+        </a>
+        <a href="https://drive.google.com/file/d/1QJaLlwLciasF0tdhjStrUYnC-NE74MpV/view?usp=drive_link" class="work-item" target="_blank">
+          <div class="work-tag">UGC Script</div>
+          <h3>The Pillow Cube </h3>
+          <div class="work-niche">Sleep & Wellness</div>
+          <div class="work-arrow">→</div>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ TESTIMONIALS ══════════ -->
+<section class="section" id="testimonials">
+  <div class="container">
+    <div class="testi-head reveal">
+      <div class="label">Testimonials</div>
+      <h2 class="section-title">What Clients Say </h2>
+      <hr class="accent" />
+    </div>
+
+    <div class="testi-grid">
+      <div class="testi-card reveal">
+        <div class="stars">★★★★★</div>
+        <p class="testi-quote">"The tone was spot on — professional but still easy to connect with. Henry clearly gets brand voice."</p>
+        <div class="testi-author">
+          <div class="author-avatar">A</div>
+          <div>
+            <div class="author-name">Adrian</div>
+            <div class="author-role">Agency Client</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testi-card reveal reveal-delay-1">
+        <div class="stars">★★★★★</div>
+        <p class="testi-quote">"Henry's copy is sharp, structured, and ready to go. It doesn't need much tweaking — just clear, intentional writing that does the job."</p>
+        <div class="testi-author">
+          <div class="author-avatar">T</div>
+          <div>
+            <div class="author-name">Tristan</div>
+            <div class="author-role">Agency Client</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testi-card reveal reveal-delay-2">
+        <div class="stars">★★★★★</div>
+        <p class="testi-quote">"Henry's copy feels fresh, not robotic, and ready to publish with barely any edits."</p>
+        <div class="testi-author">
+          <div class="author-avatar">E</div>
+          <div>
+            <div class="author-name">Evelyn</div>
+            <div class="author-role">Agency Client</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testi-card reveal reveal-delay-3">
+        <div class="stars">★★★★★</div>
+        <p class="testi-quote">"Simple, direct, and made me want to act. Henry knows how to write a CTA that does its job."</p>
+        <div class="testi-author">
+          <div class="author-avatar">S</div>
+          <div>
+            <div class="author-name">Sulay</div>
+            <div class="author-role">Agency Client</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ FINAL CTA ══════════ -->
+<section class="section final">
+  <div class="container">
+    <div class="final-inner reveal">
+      <div class="label" style="justify-content:center;">Ready to Start?</div>
+      <h2>You Could Keep&nbsp;<em class="italic">Searching.</em><br>Or Just Start Here.</h2>
+      <p>You've got campaigns to launch and deadlines to meet. Let's do one small, no-risk test — and see if I'm your person.</p>
+      <a href="https://calendly.com/henrycopybiz/30min" class="btn btn-gold btn-lg" target="_blank">
+        Book a Free 15-Min Chat →
+      </a>
+      <p class="final-note">
+        <span>Worst case?</span> You don't pay. &nbsp;·&nbsp;
+        <span>Best case?</span> You found your copywriter.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ FOOTER ══════════ -->
+<footer>
+  <p>© 2025 Henry · Copywriter for Agencies &amp; Brands</p>
+  <p>Built to convert · <a href="https://calendly.com/henrycopybiz/30min" target="_blank">Book a call</a></p>
+</footer>
+
+<!-- ══════════ JS ══════════ -->
+<script>
+  // Scroll reveal
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  // Smooth nav highlight
+  const links = document.querySelectorAll('.nav-links a');
+  const sections = document.querySelectorAll('section[id]');
+  const sio = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        links.forEach(l => l.style.color = '');
+        const active = document.querySelector(`.nav-links a[href="#${e.target.id}"]`);
+        if (active) active.style.color = '#C9A84C';
+      }
+    });
+  }, { threshold: 0.4 });
+  sections.forEach(s => sio.observe(s));
+</script>
+</body>
+</html>
