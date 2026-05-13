@@ -315,6 +315,19 @@
     }
     .pain-card p { font-size: 14px; color: var(--muted); line-height: 1.8; }
 
+    .pain-list {
+  list-style: none;
+  padding: 0;
+  margin: 2rem 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1.4rem;
+}
+.pain-list li {
+  font-size: 1.2rem;
+  color: var(--text);
+}
+
     /* skip arrow */
     .skip-wrap {
       text-align: center;
@@ -735,23 +748,11 @@
       <p>You bring someone on.<br> They promise sky-high ROI and guaranteed conversions.<br> Sounds good on paper - until…</p>
     </div>
 
-    <div class="pain-grid reveal">
-      <div class="pain-card">
-        <div class="pain-icon">⏳</div>
-        <h3>Takes forever to get a first draft</h3>
-        <p>You hire someone, get excited — then radio silence. Your deadline blows by and you're still waiting. Every. Single. Time.</p>
-      </div>
-      <div class="pain-card">
-        
-        <h3>The copy sounds like AI edited AI</h3>
-        <p>It lands in your inbox and reads like ChatGPT had a bad day. Generic. Lifeless. Nothing that sounds remotely like your brand.</p>
-      </div>
-      <div class="pain-card">
-        
-        <h3>You're rewriting it at midnight</h3>
-        <p>You end up doing the work you paid someone else to do. At 11 pm. Thinking "I should've just done this myself."</p>
-      </div>
-    </div>
+<ul class="pain-list reveal">
+  <li>❌ It takes forever just to get a first draft</li>
+  <li>❌ The copy sounds like AI wrote it… and then edited itself</li>
+  <li>❌ You're rewriting it at midnight thinking, "I should've just done this myself"</li>
+</ul>
 
     <div class="skip-wrap reveal">
       Let's skip all that → <a href="https://calendly.com/henrycopybiz/30min" target="_blank">Book a free chat</a>
