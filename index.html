@@ -176,9 +176,8 @@
     .hero-photo {
       width: 340px;
       height: 420px;
-      object-fit: contain;
+      object-fit: cover;
       object-position: center;
-      background: #111;
       border-radius: 20px;
       border: 2px solid rgba(201,168,76,.25);
       display: block;
@@ -613,7 +612,47 @@
       .hero-h1 { letter-spacing: -3px; }
       .hero-stats { gap: 32px; }
       .pain-grid { gap: 0; }
+
+      .services-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  margin-top: 48px;
+}
+
+.service-card {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 40px 36px;
+}
+
+.service-category {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 28px;
+}
+
+.service-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.service-list li {
+  font-size: 16px;
+  color: var(--muted2);
+}
+
+@media (max-width: 600px) {
+  .services-grid { grid-template-columns: 1fr; }
+}
     }
+    
   </style>
 </head>
 <body>
@@ -690,10 +729,10 @@
 <section class="section pain" id="pain">
   <div class="container">
     <div class="pain-head reveal">
-      <div class="label">Sound Familiar?</div>
+      <div class="label">Problem?</div>
       <h2 class="section-title">Hiring a Copywriter Shouldn't Be a&nbsp;<em class="italic">Roll&nbsp;of&nbsp;the&nbsp;Dice.</em></h2>
       <hr class="accent" />
-      <p>You bring someone on. They promise sky-high ROI and guaranteed conversions. Sounds good on paper — until…</p>
+      <p>You bring someone on.<br> They promise sky-high ROI and guaranteed conversions.<br> Sounds good on paper - until…</p>
     </div>
 
     <div class="pain-grid reveal">
@@ -703,19 +742,19 @@
         <p>You hire someone, get excited — then radio silence. Your deadline blows by and you're still waiting. Every. Single. Time.</p>
       </div>
       <div class="pain-card">
-        <div class="pain-icon">🤖</div>
+        
         <h3>The copy sounds like AI edited AI</h3>
         <p>It lands in your inbox and reads like ChatGPT had a bad day. Generic. Lifeless. Nothing that sounds remotely like your brand.</p>
       </div>
       <div class="pain-card">
-        <div class="pain-icon">😩</div>
+        
         <h3>You're rewriting it at midnight</h3>
         <p>You end up doing the work you paid someone else to do. At 11 pm. Thinking "I should've just done this myself."</p>
       </div>
     </div>
 
     <div class="skip-wrap reveal">
-      Let's skip all that, yeah? → <a href="https://calendly.com/henrycopybiz/30min" target="_blank">Book a free 15-min chat</a>
+      Let's skip all that → <a href="https://calendly.com/henrycopybiz/30min" target="_blank">Book a free chat</a>
     </div>
   </div>
 </section>
@@ -731,9 +770,9 @@
         <hr class="accent reveal" />
 
         <div class="reveal">
-          <p>I'm not out here claiming to be a "top 1% copywriter". I just write sharp, on-brand copy — and I get it done on time.</p>
-          <p>Here's what actually matters: you hand me a brief, I turn it into copy that sounds like your brand, not like a robot trying to pass a marketing exam. You get it back fast, and if it doesn't land — you don't pay. Simple.</p>
-          <p style="font-weight:600; color: var(--text);">Yeah, I know I'm easy on the eyes. Thank you.</p>
+          <p>I'm not out here claiming to be a "top 1% copywriter".</p>
+          <p> I just write sharp, on-brand copy and I get it done on time.</p>
+          <p><strong>Here's how it works:</strong></p>
         </div>
 
         <div class="process reveal">
@@ -741,55 +780,87 @@
             <div class="step-num">1</div>
             <div class="step-info">
               <h4>You send the brief</h4>
-              <p>Tell me what you need. I ask the right questions, not twenty annoying ones.</p>
             </div>
           </div>
           <div class="process-step">
             <div class="step-num">2</div>
             <div class="step-info">
-              <h4>I write — you review</h4>
-              <p>Sharp, on-brand copy. Wrapped up in 3 rounds max. No endless revision loops.</p>
+              <h4>I write the copy and wrap it up in 3 rounds max so you’re not stuck in revision.</h4>
             </div>
           </div>
           <div class="process-step">
             <div class="step-num">3</div>
             <div class="step-info">
-              <h4>We keep going (or we don't)</h4>
-              <p>If it works — great. We keep going. If not, no hard feelings. You owe me nothing.</p>
+              <h4>You give feedback. If it works, great – we keep going. If not, no hard feelings.</h4>
             </div>
           </div>
         </div>
+        <p>And the best part?</p>
+<p>You can hand me a test or a small project.</p>
+<p>If you hate my copy? Bin it. Forget my name. You owe me nothing.</p>
+<p>But if it actually lands?</p>
+<p>Great. That's one less thing for you to worry about.</p>
       </div>
 
       <!-- RIGHT -->
       <div class="reveal reveal-delay-2">
         <div class="guarantee-card">
           <div class="guarantee-tag">✦ Zero Risk Guarantee</div>
-          <h3>Start with a free trial project. You literally can't lose.</h3>
+          <h3>Start with a free trial project.</h3>
           <p>You could keep scrolling through 30 more portfolios — or we could run a small, no-risk test and see if we click.</p>
           <ul class="guarantee-list">
-            <li>Test project, no upfront commitment</li>
-            <li>Don't like it? Don't pay. Ever.</li>
-            <li>3 revision rounds max — no scope creep</li>
+            <li>Send me a brief</li>
+            <li>Don't like it? You pay nothing.</li>
+            <li>3 revision rounds max </li>
             <li>On-brand copy, delivered on time</li>
-            <li>No retainers, no long-term lock-in</li>
           </ul>
           <a href="https://calendly.com/henrycopybiz/30min" class="btn btn-gold" style="width:100%; justify-content:center; margin-top:8px;" target="_blank">
             Book a 15-Min Chat →
           </a>
-          <p style="text-align:center; font-size:12px; color:var(--muted); margin-top:14px;">Free. No strings. Just a conversation.</p>
         </div>
       </div>
     </div>
   </div>
 </section>
+<!-- ══════════ SERVICES ══════════ -->
+<section class="section" id="services">
+  <div class="container">
+    <div class="label">Services</div>
+    <h2 class="section-title">What I Write</h2>
 
+    <div class="services-grid">
+
+      <div class="service-card">
+        <div class="service-category">For Coaches</div>
+        <ul class="service-list">
+          <li>→ Email sequences</li>
+          <li>→ Sales pages</li>
+          <li>→ Launch copy</li>
+          <li>→ Landing pages</li>
+          <li>→ Ads</li>
+          <li>→ Blogs</li>
+        </ul>
+      </div>
+
+      <div class="service-card">
+        <div class="service-category">For Ecom Brands</div>
+        <ul class="service-list">
+          <li>→ Facebook & UGC ads</li>
+          <li>→ Abandoned cart flows</li>
+          <li>→ Landing pages</li>
+          <li>→ Lead magnet copy</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
 <!-- ══════════ PORTFOLIO ══════════ -->
 <section class="section portfolio" id="work">
   <div class="container">
     <div class="portfolio-head reveal">
       <div>
-        <div class="label">Past Work</div>
+        <div class="label"> Work</div>
         <h2 class="section-title">Check Out What<br>I've Written.</h2>
       </div>
       <a href="https://calendly.com/henrycopybiz/30min" class="btn btn-gold" target="_blank">Work With Me →</a>
@@ -917,13 +988,14 @@
   <div class="container">
     <div class="final-inner reveal">
       <div class="label" style="justify-content:center;">Ready to Start?</div>
-      <h2>You Could Keep&nbsp;<em class="italic">Searching.</em><br>Or Just Start Here.</h2>
-      <p>You've got campaigns to launch and deadlines to meet. Let's do one small, no-risk test — and see if I'm your person.</p>
+      <h2>You Could Keep&nbsp;<em class="italic">Searching...</em><br>Or Just Start Here.</h2>
+      <p>You've got campaigns to launch and deadlines to meet<br>. You could keep scrolling through another 30 portfolios…<br> Or we could try a small, no-risk project and see if we’re a fit.
+<br> </p>
       <a href="https://calendly.com/henrycopybiz/30min" class="btn btn-gold btn-lg" target="_blank">
         Book a Free 15-Min Chat →
       </a>
       <p class="final-note">
-        <span>Worst case?</span> You don't pay. &nbsp;·&nbsp;
+        <span>Worst case?</span> You don't pay. &nbsp;  &nbsp;
         <span>Best case?</span> You found your copywriter.
       </p>
     </div>
