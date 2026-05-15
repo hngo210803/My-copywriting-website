@@ -246,6 +246,10 @@
       line-height: .96;
       margin-bottom: 36px;
     }
+    #typed-word {
+      display: inline-block;
+      min-width: 9ch;
+    }
 
     .hero-sub {
       font-size: 19px;
@@ -432,7 +436,7 @@
     }
 
     /* ─── PORTFOLIO ──────────────────────────── */
-    .portfolio { background: var(--bg2); }
+    .portfolio { background: var(--bg); }      /* #080808 — tối nhất */
 
     .portfolio-head {
       display: flex; justify-content: space-between; align-items: flex-end;
@@ -565,7 +569,7 @@
 
     /* ─── FINAL CTA ──────────────────────────── */
     .final {
-      background: var(--bg2);
+      background: var(--bg3);   /* #191919 — sáng nhất trong 3 */
       text-align: center;
     }
     .final-inner {
@@ -678,7 +682,7 @@
       color: var(--muted2);
     }
 
-    .services-section { background: var(--bg2); }
+    .services-section { background: var(--bg2); }  /* #111 */
 
 
   </style>
@@ -1009,18 +1013,23 @@
 <!-- ══════════ JS ══════════ -->
 <script>
   // ── 1. SCROLL REVEAL ──────────────────────────────────────
-  // Pain items + process steps replay every time they enter viewport
-  const replayIO = new IntersectionObserver(entries => {
-    entries.forEach(e => {
-      e.target.classList.toggle('in', e.isIntersecting);
-    });
-  }, { threshold: 0.2 });
-  document.querySelectorAll('.pain-list .reveal, .process-replay').forEach(el => replayIO.observe(el));
+  // Separate replay elements (pain + process) vs one-time reveals
+  const replayEls = new Set();
+  document.querySelectorAll('.pain-list .reveal, .process-replay').forEach(el => replayEls.add(el));
 
+  // Replay observer — re-triggers every scroll
+  const replayIO = new IntersectionObserver(entries => {
+    entries.forEach(e => e.target.classList.toggle('in', e.isIntersecting));
+  }, { threshold: 0.2 });
+  replayEls.forEach(el => replayIO.observe(el));
+
+  // One-time observer — plays once
   const io = new IntersectionObserver(entries => {
     entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
   }, { threshold: 0.12 });
-  document.querySelectorAll('.reveal:not(.pain-list .reveal):not(.process-replay)').forEach(el => io.observe(el));
+  document.querySelectorAll('.reveal').forEach(el => {
+    if (!replayEls.has(el)) io.observe(el);
+  });
 
   // ── 2. TYPING / CYCLING HERO WORD ─────────────────────────
   const words = ['Agencies', 'Coaches', 'Brands'];
