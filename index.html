@@ -606,10 +606,10 @@
       transition: opacity .65s ease, transform .65s ease;
     }
     .reveal.in { opacity: 1; transform: translateY(0); }
-    .reveal-delay-1 { transition-delay: .1s; }
-    .reveal-delay-2 { transition-delay: .2s; }
-    .reveal-delay-3 { transition-delay: .3s; }
-    .reveal-delay-4 { transition-delay: .4s; }
+    .reveal-delay-1 { transition-delay: .25s; }
+    .reveal-delay-2 { transition-delay: .5s; }
+    .reveal-delay-3 { transition-delay: .75s; }
+    .reveal-delay-4 { transition-delay: 1s; }
 
     /* ─── RESPONSIVE ─────────────────────────── */
     @media (max-width: 900px) {
@@ -678,15 +678,8 @@
       color: var(--muted2);
     }
 
-    /* Searching typing animation */
-    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
-    .searching-word {
-      display: inline-block;
-      color: var(--gold);
-      border-right: 3px solid var(--gold);
-      animation: blink 0.8s step-end infinite;
-      padding-right: 2px;
-    }
+    .services-section { background: var(--bg2); }
+
 
   </style>
 </head>
@@ -697,9 +690,10 @@
   <a href="#" class="nav-logo">Henry<span>.</span></a>
   <ul class="nav-links">
     <li><a href="#about">About</a></li>
+    <li><a href="#services">Services</a></li>
     <li><a href="#work">Work</a></li>
     <li><a href="#testimonials">Reviews</a></li>
-    <li><a href="#final">Ready to Start?</a></li>
+    <li><a href="#final">Ready to Start</a></li>
   </ul>
   <a href="https://calendly.com/henrycopybiz/30min" class="btn btn-gold" target="_blank">Book a Free Chat →</a>
 </nav>
@@ -779,20 +773,20 @@
           <p><strong>Here's how it works:</strong></p>
         </div>
 
-        <div class="process reveal">
-          <div class="process-step">
+        <div class="process">
+          <div class="process-step reveal process-replay">
             <div class="step-num">1</div>
             <div class="step-info">
               <h4>You send the brief</h4>
             </div>
           </div>
-          <div class="process-step">
+          <div class="process-step reveal reveal-delay-1 process-replay">
             <div class="step-num">2</div>
             <div class="step-info">
               <h4>I write the copy and wrap it up in 3 rounds max so you’re not stuck in revision.</h4>
             </div>
           </div>
-          <div class="process-step">
+          <div class="process-step reveal reveal-delay-2 process-replay">
             <div class="step-num">3</div>
             <div class="step-info">
               <h4>You give feedback. If it works, great – we keep going. If not, no hard feelings.</h4>
@@ -827,7 +821,7 @@
   </div>
 </section>
 <!-- ══════════ SERVICES ══════════ -->
-<section class="section" id="services">
+<section class="section services-section" id="services">
   <div class="container">
     <div class="label reveal">Services</div>
     <h2 class="section-title reveal">What I Write</h2>
@@ -992,7 +986,7 @@
   <div class="container">
     <div class="final-inner reveal">
       <div class="label" style="justify-content:center;">Ready to Start?</div>
-      <h2>You Could Keep&nbsp;<em class="italic searching-word">Searching...</em><br>Or Just Start Here.</h2>
+      <h2>You Could Keep&nbsp;<em class="italic">Searching...</em><br>Or Just Start Here.</h2>
       <p>You've got campaigns to launch and deadlines to meet<br>. You could keep scrolling through another 30 portfolios…<br> Or we could try a small, no-risk project and see if we’re a fit.
 <br> </p>
       <a href="https://calendly.com/henrycopybiz/30min" class="btn btn-gold btn-lg" target="_blank">
@@ -1015,10 +1009,18 @@
 <!-- ══════════ JS ══════════ -->
 <script>
   // ── 1. SCROLL REVEAL ──────────────────────────────────────
+  // Pain items + process steps replay every time they enter viewport
+  const replayIO = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      e.target.classList.toggle('in', e.isIntersecting);
+    });
+  }, { threshold: 0.2 });
+  document.querySelectorAll('.pain-list .reveal, .process-replay').forEach(el => replayIO.observe(el));
+
   const io = new IntersectionObserver(entries => {
     entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
   }, { threshold: 0.12 });
-  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+  document.querySelectorAll('.reveal:not(.pain-list .reveal):not(.process-replay)').forEach(el => io.observe(el));
 
   // ── 2. TYPING / CYCLING HERO WORD ─────────────────────────
   const words = ['Agencies', 'Coaches', 'Brands'];
@@ -1081,31 +1083,6 @@
     });
   }, { threshold: 0.3 });
   document.querySelectorAll('.stat-num').forEach(el => counterIO.observe(el));
-
-  // ── 4. SEARCHING TYPEWRITER ───────────────────────────────
-  const searchEl = document.querySelector('.searching-word');
-  if (searchEl) {
-    const searchText = 'Searching...';
-    let sc = 0, sDeleting = false;
-    function searchType() {
-      searchEl.textContent = sDeleting
-        ? searchText.slice(0, sc--)
-        : searchText.slice(0, ++sc);
-      if (!sDeleting && sc === searchText.length) {
-        setTimeout(() => { sDeleting = true; searchType(); }, 2200);
-      } else if (sDeleting && sc === 0) {
-        sDeleting = false;
-        setTimeout(searchType, 500);
-      } else {
-        setTimeout(searchType, sDeleting ? 50 : 110);
-      }
-    }
-    // Start when element enters viewport
-    const searchIO = new IntersectionObserver(entries => {
-      if (entries[0].isIntersecting) { searchType(); searchIO.disconnect(); }
-    }, { threshold: 0.5 });
-    searchIO.observe(searchEl);
-  }
 
   // ── 5. GOLD UNDERLINE already handled by CSS ──────────────
 
