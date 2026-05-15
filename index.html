@@ -1054,13 +1054,25 @@
 
   // ── 3. COUNTER ANIMATION FOR STATS ───────────────────────
   function animateCounter(el) {
-    const raw = el.textContent.trim();
+    const raw = el.getAttribute('data-val') || el.textContent.trim();
+    el.setAttribute('data-val', raw);
     const prefix = raw.startsWith('$') ? '$' : '';
     const suffix = raw.endsWith('%') ? '%' : raw.endsWith('★') ? '★' : '';
     const num = parseFloat(raw.replace(/[^0-9.]/g, ''));
-    if (isNaN(num) || num === 0) return;
-    const duration = 1200;
+
+    // $0 — just pop in with scale animation
+    if (isNaN(num) || num === 0) {
+      el.style.transition = 'transform .5s cubic-bezier(.34,1.56,.64,1), opacity .5s';
+      el.style.transform = 'scale(1.3)';
+      el.style.opacity = '0';
+      setTimeout(() => { el.style.transform = 'scale(1)'; el.style.opacity = '1'; }, 50);
+      return;
+    }
+
+    // slow down small numbers so animation is visible
+    const duration = num <= 5 ? 1000 : num <= 10 ? 1200 : 1400;
     const start = performance.now();
+    el.textContent = prefix + '0' + suffix;
     function tick(now) {
       const p = Math.min((now - start) / duration, 1);
       const eased = 1 - Math.pow(1 - p, 3);
@@ -1077,7 +1089,7 @@
         counterIO.unobserve(e.target);
       }
     });
-  }, { threshold: 0.5 });
+  }, { threshold: 0.3 });
   document.querySelectorAll('.stat-num').forEach(el => counterIO.observe(el));
 
   // ── 4. GOLD UNDERLINE already handled by CSS ──────────────
