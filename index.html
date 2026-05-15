@@ -246,6 +246,7 @@
       line-height: .96;
       margin-bottom: 36px;
     }
+    .h1-line { display: block; }
     #typed-word { display: inline; }
     .type-cursor {
       display: inline-block;
@@ -356,10 +357,27 @@
     .skip-wrap {
       text-align: center;
       padding: 48px 0 0;
-      color: var(--muted);
-      font-size: 14px;
+      color: var(--muted2);
+      font-size: 18px;
+      font-weight: 500;
     }
-    .skip-wrap a { color: var(--gold); font-weight: 600; }
+    .skip-wrap a {
+      color: var(--gold);
+      font-weight: 700;
+      position: relative;
+      padding-bottom: 2px;
+    }
+    .skip-wrap a::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0;
+      width: 0; height: 2px;
+      background: var(--gold);
+      border-radius: 2px;
+      transition: width .3s cubic-bezier(.4,0,.2,1);
+    }
+    .skip-wrap a:hover::after { width: 100%; }
+    .skip-wrap a:hover { color: var(--gold-lt); }
 
     /* ─── ABOUT ──────────────────────────────── */
     .about-grid {
@@ -720,9 +738,9 @@
     <!-- LEFT: text -->
     <div class="hero-left">
       <h1 class="hero-h1">
-        The Copy&shy;writer<br>
-        <span id="typed-word">Agencies</span><span class="type-cursor"></span> <em class="italic gold">Trust</em><br>
-        To Get Sh*t Done.
+        <span class="h1-line">The Copy&shy;writer</span>
+        <span class="h1-line"><span id="typed-word">Agencies</span><span class="type-cursor"></span> <em class="italic gold">Trust</em></span>
+        <span class="h1-line">To Get Sh*t Done.</span>
       </h1>
 
       <p class="hero-sub">
@@ -1023,7 +1041,7 @@
   // ── 1. SCROLL REVEAL ──────────────────────────────────────
   // Separate replay elements (pain + process) vs one-time reveals
   const replayEls = new Set();
-  document.querySelectorAll('.pain-list .reveal, .process-replay').forEach(el => replayEls.add(el));
+  document.querySelectorAll('.pain-list .reveal, .process-replay, .service-card.reveal').forEach(el => replayEls.add(el));
 
   // Replay observer — re-triggers every scroll
   const replayIO = new IntersectionObserver(entries => {
@@ -1047,7 +1065,6 @@
   function typeLoop() {
     const word = words[wi];
     typedEl.textContent = deleting ? word.slice(0, ci--) : word.slice(0, ++ci);
-    typedEl.style.borderRight = '2px solid #C9A84C';
 
     if (!deleting && ci === word.length) {
       setTimeout(() => { deleting = true; typeLoop(); }, 1800);
