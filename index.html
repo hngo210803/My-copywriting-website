@@ -78,8 +78,22 @@
       font-size: 13px; font-weight: 500;
       color: var(--muted2);
       transition: color .2s;
+      position: relative;
+      padding-bottom: 3px;
     }
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0;
+      width: 0; height: 2px;
+      background: var(--gold);
+      border-radius: 2px;
+      transition: width .3s cubic-bezier(.4,0,.2,1);
+    }
+    .nav-links a:hover::after,
+    .nav-links a.nav-active::after { width: 100%; }
     .nav-links a:hover { color: var(--text); }
+    .nav-links a.nav-active { color: var(--gold); }
 
     /* ─── BUTTONS ────────────────────────────── */
     .btn {
@@ -352,7 +366,8 @@
     }
 
     .process {
-      margin-top: 48px;
+      margin-top: 32px;
+      margin-bottom: 32px;
       display: flex; flex-direction: column; gap: 20px;
     }
     .process-step {
@@ -691,7 +706,7 @@
     <div class="hero-left">
       <h1 class="hero-h1">
         The Copy&shy;writer<br>
-        Agencies <em class="italic gold">Trust</em><br>
+        <span id="typed-word">Agencies</span> <em class="italic gold">Trust</em><br>
         To Get Sh*t Done.
       </h1>
 
@@ -1009,21 +1024,73 @@
 
 <!-- ══════════ JS ══════════ -->
 <script>
-  // Scroll reveal
+  // ── 1. SCROLL REVEAL ──────────────────────────────────────
   const io = new IntersectionObserver(entries => {
     entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
   }, { threshold: 0.12 });
   document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 
-  // Smooth nav highlight
-  const links = document.querySelectorAll('.nav-links a');
+  // ── 2. TYPING / CYCLING HERO WORD ─────────────────────────
+  const words = ['Agencies', 'Coaches', 'Brands'];
+  const typedEl = document.getElementById('typed-word');
+  let wi = 0, ci = 0, deleting = false;
+
+  function typeLoop() {
+    const word = words[wi];
+    typedEl.textContent = deleting ? word.slice(0, ci--) : word.slice(0, ++ci);
+    typedEl.style.borderRight = '2px solid #C9A84C';
+
+    if (!deleting && ci === word.length) {
+      setTimeout(() => { deleting = true; typeLoop(); }, 1800);
+    } else if (deleting && ci === 0) {
+      deleting = false;
+      wi = (wi + 1) % words.length;
+      setTimeout(typeLoop, 300);
+    } else {
+      setTimeout(typeLoop, deleting ? 60 : 100);
+    }
+  }
+  setTimeout(typeLoop, 1200);
+
+  // ── 3. COUNTER ANIMATION FOR STATS ───────────────────────
+  function animateCounter(el) {
+    const raw = el.textContent.trim();
+    const prefix = raw.startsWith('$') ? '$' : '';
+    const suffix = raw.endsWith('%') ? '%' : raw.endsWith('★') ? '★' : '';
+    const num = parseFloat(raw.replace(/[^0-9.]/g, ''));
+    if (isNaN(num) || num === 0) return;
+    const duration = 1200;
+    const start = performance.now();
+    function tick(now) {
+      const p = Math.min((now - start) / duration, 1);
+      const eased = 1 - Math.pow(1 - p, 3);
+      const val = Math.round(eased * num);
+      el.textContent = prefix + val + suffix;
+      if (p < 1) requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  }
+  const counterIO = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        animateCounter(e.target);
+        counterIO.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.5 });
+  document.querySelectorAll('.stat-num').forEach(el => counterIO.observe(el));
+
+  // ── 4. GOLD UNDERLINE already handled by CSS ──────────────
+
+  // ── 5. ACTIVE NAV HIGHLIGHT ───────────────────────────────
+  const navLinks = document.querySelectorAll('.nav-links a');
   const sections = document.querySelectorAll('section[id]');
   const sio = new IntersectionObserver(entries => {
     entries.forEach(e => {
       if (e.isIntersecting) {
-        links.forEach(l => l.style.color = '');
+        navLinks.forEach(l => l.classList.remove('nav-active'));
         const active = document.querySelector(`.nav-links a[href="#${e.target.id}"]`);
-        if (active) active.style.color = '#C9A84C';
+        if (active) active.classList.add('nav-active');
       }
     });
   }, { threshold: 0.4 });
